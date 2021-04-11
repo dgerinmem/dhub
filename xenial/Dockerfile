@@ -1,5 +1,6 @@
 FROM ubuntu:16.04
 
+ARG DEBIAN_FRONTEND=noninteractive
 RUN adduser --disabled-password --home /home/docker-build --uid 10000 --gecos ",,," builder
 RUN echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN apt -y update
@@ -39,6 +40,5 @@ ENV PB11_SOURCE_DIR=/pybind11
 RUN git clone https://github.com/pybind/pybind11 ${PB11_SOURCE_DIR}
 ENV CROSS_COMPILATION_TARGET=${CROSS_COMPILATION_TARGET:-x86}
 ENV PB11_BUILD_DIR=/build/pybind11-${CROSS_COMPILATION_TARGET}
-ENV PB11_INSTALL_DIR=install/${PB11_SOURCE_DIR}
-RUN mkdir -p ${PB11_INSTALL_DIR} && mkdir -p ${PB11_BUILD_DIR} && cd ${PB11_BUILD_DIR} && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${PB11_INSTALL_DIR} ${PB11_SOURCE_DIR}
-RUN make install
+ENV PB11_INSTALL_DIR=/install/
+RUN mkdir -p ${PB11_INSTALL_DIR} && mkdir -p ${PB11_BUILD_DIR} && cd ${PB11_BUILD_DIR} && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${PB11_INSTALL_DIR} ${PB11_SOURCE_DIR} && make install
