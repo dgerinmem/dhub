@@ -16,6 +16,39 @@ RUN apt -y install curl
 RUN apt -y install wget
 RUN apt install -y cmake cmake-gui ninja-build libncurses-dev autoconf gperf bison flex texinfo help2man gawk libtool-bin git git-gui libconfig++-dev libz-dev valgrind cmake-curses-gui libboost-thread-dev libboost-system-dev 
 
+RUN apt-get update && apt-get install -y \
+    clang-format-6.0 \
+    default-jdk \
+    doxygen \
+    expect \
+    gcc-8 \
+    g++-8 \
+    git \
+    graphviz \
+    libedit-dev \
+    libelf-dev \
+    libncurses5-dev \
+    libnuma-dev \
+    libudev-dev \
+    libxml2-dev \
+    make \
+    maven \
+    ninja-build \
+    openjdk-11-jdk \
+    pkg-config \
+    lsb-release \
+    swig \
+    vim \
+    valgrind \
+    wget \
+    libusb-1.0-0-dev \
+    libftdi-dev
+
+# Use GCC-8 as default compiler
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 80 \
+    --slave /usr/bin/g++ g++ /usr/bin/g++-8
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 70 \
+    --slave /usr/bin/g++ g++ /usr/bin/g++-7
 
 # cmake 3.12.1
 RUN wget http://www.cmake.org/files/v3.12/cmake-3.12.1.tar.gz && tar xvf cmake-3.12.1.tar.gz && rm cmake-3.12.1.tar.gz && cd cmake-3.12.1 && ./configure && make -j 12 &&  make install
