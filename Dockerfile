@@ -50,10 +50,7 @@ RUN echo 'upmem ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 #  --------------------------------------------------------------------
 #  Install upmem SDK not using docker cache to make sure wget is performed
 ARG CACHEBUST=1
-
-COPY ./upmem_2021.3.0_amd64.deb  /home/upmem/upmem_sdk_amd64.deb
-RUN apt-get install -y /home/upmem/upmem_sdk_amd64.deb && \
-    rm -f /home/upmem/upmem_sdk_amd64.deb
+RUN wget http://sdk-releases.upmem.com/2021.3.0/ubuntu_18.04/upmem_2021.3.0_amd64.deb && apt-get install -y upmem_sdk_amd64.deb && rm -f upmem_sdk_amd64.deb
 
 # additionan python3 packes for upmem dpu-profiling
 RUN apt install -y python3-pip
