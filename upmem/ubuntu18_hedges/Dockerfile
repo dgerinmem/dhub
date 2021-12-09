@@ -58,3 +58,4 @@ RUN apt-get install -y /home/upmem/upmem_sdk_amd64.deb && \
 # additionan python3 packes for upmem dpu-profiling
 RUN apt install -y python3-pip
 RUN pip3 install pyyaml 'pyelftools>=0.26'
+RUN pip3 install pandas 
