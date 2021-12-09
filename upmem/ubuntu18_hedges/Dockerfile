@@ -54,3 +54,7 @@ ARG CACHEBUST=1
 COPY ./upmem_2021.3.0_amd64.deb  /home/upmem/upmem_sdk_amd64.deb
 RUN apt-get install -y /home/upmem/upmem_sdk_amd64.deb && \
     rm -f /home/upmem/upmem_sdk_amd64.deb
+
+# additionan python3 packes for upmem dpu-profiling
+RUN apt install -y python3-pip
+RUN pip3 install pyyaml 'pyelftools>=0.26'
