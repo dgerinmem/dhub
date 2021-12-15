@@ -16,12 +16,7 @@ RUN apt -y install chrpath graphviz
 RUN apt -y install doxygen
 RUN apt -y install curl
 RUN apt -y install wget
-RUN apt install -y cmake cmake-gui ninja-build libncurses-dev autoconf gperf bison flex texinfo help2man gawk libtool-bin git git-gui libconfig++-dev libz-dev valgrind cmake-curses-gui libboost-thread-dev libboost-system-dev 
-
-# cmake 3.12.1
-RUN wget http://www.cmake.org/files/v3.12/cmake-3.12.1.tar.gz && tar xvf cmake-3.12.1.tar.gz && rm cmake-3.12.1.tar.gz && cd cmake-3.12.1 && ./configure && make -j 12 &&  make install
-RUN curl https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh -o script.deb.sh
-RUN bash script.deb.sh
+RUN apt install -y ninja-build libncurses-dev autoconf gperf bison flex texinfo help2man gawk libtool-bin git git-gui libconfig++-dev libz-dev valgrind cmake-curses-gui libboost-thread-dev libboost-system-dev 
 
 # basic python on system
 RUN apt -y install python lsb-release unzip
@@ -58,3 +53,6 @@ RUN apt-get install -y /home/upmem/upmem_sdk_amd64.deb && \
 # additionan python3 packes for upmem dpu-profiling
 RUN apt install -y python3-pip
 RUN pip3 install pyyaml 'pyelftools>=0.26'
+
+# cmake 3.21.4
+RUN pip install cmake==3.21.4
